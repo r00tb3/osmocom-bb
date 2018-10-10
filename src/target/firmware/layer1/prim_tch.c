@@ -402,17 +402,15 @@ static int l1s_tch_cmd(__unused uint8_t p1, __unused uint8_t p2, uint16_t p3)
 		icnt++;
 
 	/* Load FACCH data if we start a new burst */
-	/* (the DSP wants the data on the CMD of the burst _preceding_ the
-	 * first burst) */
 	if (tch_f_hn) {
 		/* FACCH/F: B0(0...7),B1(4...11),B2(8...11,0...3) */
 		facch_tx_now = ((l1s.next_time.fn % 13) % 4) == 3;
 	} else {
 		/* FAACH/H: See GSM 05.02 Clause 7 Table 1of9 */
 		uint8_t t2_norm = l1s.next_time.t2 - tch_sub;
-		facch_tx_now = (t2_norm == 23) ||
-		               (t2_norm ==  6) ||
-		               (t2_norm == 15);
+		facch_tx_now = (t2_norm ==  0) ||
+		               (t2_norm ==  8) ||
+		               (t2_norm == 17);
 	}
 
 	if (facch_tx_now) {
