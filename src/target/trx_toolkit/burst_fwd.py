@@ -177,6 +177,7 @@ class BurstForwarder:
 		msg.toa256 = self.calc_ul_toa256()
 		msg.toa256 -= self.calc_ta256()
 		msg.rssi = self.calc_ul_rssi()
+		print("[d] preprocess msg: toa256=%d rssi=%d (rand? %r)" % (msg.toa256, msg.rssi, repr(self.randomize_ul_rssi)))
 
 	# Converts a L12TRX message to TRX2L1 message
 	def transform_msg(self, msg_raw):
